@@ -31,10 +31,10 @@ Note: Observe that you only need to re-build the app in the case that for some r
 4. Find the serial port that correspond to the device. To accomplish this we need to find the device's address with hcitool,
   and then configure the serial port,
 
-      ```bash
+      `
       hcitool scan
       rfcomm bind /dev/rfcomm0 xx:xx:xx:xx:xx:xx 1
-      ```
+      `
 
 where xx:xx:xx:xx:xx:xx represents the output of hcitool (see [this](http://www.westernwillow.com/cms/blog/franco/creating-bluetooth-serial-port-ubuntu) example).
 
@@ -87,34 +87,24 @@ Note:
       1. Linux users, since the app uses the serial port to exchange data with the device, your account may need to have superuser privileges (use sudo before any command).
       2. Linux and Mac users may need to add the path the the folder containing the binary and libraries to the system library path, if so use the following command
       
-            ```bash
-            export LD_LIBRARY_PATH=/.../dsi2lsl_deploy_folder:$LD_LIBRARY_PATH
-            ```
+            `export LD_LIBRARY_PATH=/.../dsi2lsl_deploy_folder:$LD_LIBRARY_PATH`
 
 ### --port ###
 Specify the serial port with the --port option. If not specified, the API will look for an environment variable called DSISerialPort
 
-      ```bash
-      ./dsi2lsl --port=/dev/rfcomm0
-      ```
+      `./dsi2lsl --port=/dev/rfcomm0`
 
 ### --lsl-stream ###
 Specify the name of the LSL outlet that will stream the data to the local network. If omitted, the default name WS-default will be used
 
-      ```bash
-      ./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream
-      ```
+      `./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream`
 
 ### --montage ###
 Specify the montage, a list of channel specifications, comma-separated without spaces, (can also be space-delimited, but then you would need to enclose the option in quotes on the command-line). If omitted all available channels will be used.
 
-      ```bash
-      ./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream --montage==F3,C3,P3,P4,C4,F4,Pz
-      ```
+      `./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream --montage==F3,C3,P3,P4,C4,F4,Pz`
 
 ### --reference ###
 Specify the reference, the name of sensor (or linear combination of sensors, without spaces) to be used as reference. Defaults to a \"traditional\" averaged-ears or averaged-mastoids reference if available, or the factory reference (typically Pz) if these sensors are not available.
 
-      ```bash
-      ./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream --montage==F3,C3,P3,P4,C4,F4,Pz --reference Pz
-      ```
+      `./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream --montage==F3,C3,P3,P4,C4,F4,Pz --reference Pz`

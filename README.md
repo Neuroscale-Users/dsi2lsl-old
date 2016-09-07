@@ -1,16 +1,17 @@
 #dsi2lsl#
 
-Use this program to stream real-time data acquired by a Wearable Sensing DSI headset to the local area network (LAN) via the LSL library.
-Below we list the install instructions (including Bluetooth config issues) for GNU/Linux, Windows, and Mac. All commands need to be typed
-on a terminal/command window.
+Use this program to stream real-time data acquired by a [Wearable Sensing](http://www.wearablesensing.com) DSI headset to the local area network (LAN) via the [LSL](https://github.com/sccn/labstreaminglayer) library.
+Below we list the build instructions (including Bluetooth troubleshooting steps) for GNU/Linux, Windows, and Mac. All commands need to be typed on a terminal.
 
-Note: Observe that you only need to re-build the app in the case that for some reason the provided binary doesn't run on your system.
+For deployment just copy the subfolder inside Deploy/ that correspond to your OS.
 
-#Install#
+Note: You only need to re-build the app if for some reason the binary in the Deploy folder doesn't run on your system.
+
+#Build#
 
 ##GNU/Linux##
 
-1. Move to the dsi2lsl/ folder. Observe that you have to substitute "/.." by the specific full path to the dsi2lsl folder in your file system.
+1. Move to the dsi2lsl/ folder. Substitute "/.." by the specific full path to the dsi2lsl folder in your file system.
 
 ```bash
 cd /../dsi2lsl
@@ -22,21 +23,21 @@ cd /../dsi2lsl
 gcc -DDSI_PLATFORM=-Linux-x86_64  -o "Deploy/Linux/dsi2lsl" dsi2lsl.c  DSI_API_Loader.c -ldl  -L /../dsi2lsl/Deploy/Linux -llsl
 ```
 
-3. Configure Bluetooth. Pair the DSI device using the Bluetooth device manager. If you don't have the Bluetooth stack properly configured do so using the following command,
+3. Configure Bluetooth. Pair the DSI device using the Bluetooth device manager. If you don't have the Bluetooth stack properly installed do so using the following command,
 
 ```bash
 sudo apt-get install bluez bluez-tools
 ```
 
-4. Find the serial port that correspond to the device. To accomplish this we need to find the device's address with hcitool,
-  and then configure the serial port,
+4. Find the serial port that corresponds to the device. To accomplish this we need to find the device's address with hcitool,
+  and then bind to it,
 
 ``` bash
 hcitool scan
 rfcomm bind /dev/rfcomm0 xx:xx:xx:xx:xx:xx 1
 ```
 
-where xx:xx:xx:xx:xx:xx represents the output of hcitool (see [this](http://www.westernwillow.com/cms/blog/franco/creating-bluetooth-serial-port-ubuntu) example).
+where xx:xx:xx:xx:xx:xx represents the output of hcitool (see [this](http://www.westernwillow.com/cms/blog/franco/creating-bluetooth-serial-port-ubuntu) example). We'll need this info later at run time.
 
 
 ##Mac##
@@ -59,7 +60,7 @@ gcc -DDSI_PLATFORM=-Darwing-x86_64  -o "Deploy/Mac/dsi2lsl" dsi2lsl.c  DSI_API_L
 ls -l tty.*
 ```
       
-for us this returned /dev/tty.DSI7-017-BluetoothSeria.
+for us this returned /dev/tty.DSI7-017-BluetoothSeria. We'll need this info later at run time.
 
 
 ##Windows##
@@ -76,7 +77,7 @@ cd /../dsi2lsl
 gcc -DDSI_PLATFORM=-Windows-x86_32 -o "Deploy/Windows/dsi2lsl.exe" dsi2lsl.c  DSI_API_Loader.c -ldl  -L /../dsi2lsl/Deploy/Windows -llsl32
 ```
 
-3. Add the device using the Bluetooth manager, then find the port by right clicking on the device and clicking Properties/Hardware. For us the port was COM49.
+3. Add the device using the Bluetooth manager, then find the port by right clicking on the device and clicking Properties/Hardware. For us the port was COM49. We'll need this info later at run time.
 
 
 #Examples#
@@ -92,7 +93,7 @@ export LD_LIBRARY_PATH=/.../dsi2lsl_deploy_folder:$LD_LIBRARY_PATH
 ```
 
 ### --port ###
-Specify the serial port with the --port option. If not specified, the API will look for an environment variable called DSISerialPort
+Specify the serial port with the --port option. If not specified, the API will look for an environment variable called DSISerialPort. This example uses the serial port that the device is binded to on GNU/Linux, for other platforms see the previous secton.
 
 ``` bash
 ./dsi2lsl --port=/dev/rfcomm0

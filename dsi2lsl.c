@@ -125,6 +125,7 @@ void      getRandomString( char *s, const int len);
 const char * GetStringOpt( int argc, const char * argv[], const char * keyword1, const char * keyword2 );
 int         GetIntegerOpt( int argc, const char * argv[], const char * keyword1, const char * keyword2, int defaultValue );
 
+float *sample;
 static volatile int KeepRunning = 1;
 void  QuitHandler(int a){ KeepRunning = 0;}
 
@@ -202,7 +203,7 @@ void OnSample( DSI_Headset h, double packetOffsetTime, void * outlet)
 {
   unsigned int channelIndex;
   unsigned int numberOfChannels = DSI_Headset_GetNumberOfChannels( h );
-  float *sample = (float *)malloc( numberOfChannels * sizeof(float));
+  if (sample==NULL) sample = (float *)malloc( numberOfChannels * sizeof(float));
   for(channelIndex=0; channelIndex < numberOfChannels; channelIndex++){
     sample[channelIndex] = (float) DSI_Channel_GetSignal( DSI_Headset_GetChannelByIndex( h, channelIndex ) );
   }

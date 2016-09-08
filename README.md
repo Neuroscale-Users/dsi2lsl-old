@@ -51,7 +51,7 @@ cd /../dsi2lsl
 2. Compile,
 
 ```bash
-gcc -DDSI_PLATFORM=-Darwing-x86_64  -o "Deploy/Mac/dsi2lsl" dsi2lsl.c  DSI_API_Loader.c -ldl  -L /../dsi2lsl/Deploy/Mac -llsl64
+gcc -DDSI_PLATFORM=-Darwin-x86_64  -o "Deploy/Mac/dsi2lsl" dsi2lsl.c  DSI_API_Loader.c -ldl  -L /../dsi2lsl/Deploy/Mac -llsl64
 ```
 
 3. Add the DSI device through the Bluetooth manager, then find the port using the following command,

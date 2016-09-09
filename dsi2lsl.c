@@ -161,7 +161,7 @@ int main( int argc, const char * argv[] )
   // Implements a Ctrl+C signal handler to quit the program (some terminals actually use Ctrl+Shift+C instead)
   signal(SIGINT, QuitHandler);
 
-  printf("'Initializing the headset\n");
+  printf("Initializing the headset\n");
   DSI_Headset h;
   int help, error;
   error = StartUp( argc, argv, &h, &help ); // common routine for all demos, to initialize the headset

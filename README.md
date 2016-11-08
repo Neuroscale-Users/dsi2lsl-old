@@ -110,12 +110,12 @@ Specify the name of the LSL outlet that will stream the data to the local networ
 Specify the montage, a list of channel specifications, comma-separated without spaces, (can also be space-delimited, but then you would need to enclose the option in quotes on the command-line). If omitted all available channels will be used.
 
 ``` bash
-./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream --montage==F3,C3,P3,P4,C4,F4,Pz
+./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream --montage=F3,C3,P3,P4,C4,F4,Pz
 ```
 
 ### --reference ###
 Specify the reference, the name of sensor (or linear combination of sensors, without spaces) to be used as reference. Defaults to a \"traditional\" averaged-ears or averaged-mastoids reference if available, or the factory reference (typically Pz) if these sensors are not available.
 
 ``` bash
-./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream --montage==F3,C3,P3,P4,C4,F4,Pz --reference Pz
+./dsi2lsl --port=/dev/rfcomm0 --lsl-stream-name=mystream --montage=F3,C3,P3,P4,C4,F4,Pz --reference Pz
 ```

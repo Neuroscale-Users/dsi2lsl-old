@@ -31,7 +31,7 @@ private:
     QProcess *streamer;
     QString program = "./dsi2lsl";
     QString port = "--port=";
-    QString lslStream = "--lsl-stream=";
+    QString lslStream = "--lsl-stream-name=";
     QString montage = "--montage=";
     QString reference = "--reference=";
     QString defaultValule = "(use default)";
